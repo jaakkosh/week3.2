@@ -4,10 +4,9 @@ const express = require('express');
 const multer  = require('multer');
 const catController = require('../controllers/catController');
 const router = express.Router();
-
 const { body } =require('express-validator');
 
-const fileFilter = (req,file, cb)=>{
+const fileFilter = (req, file, cb)=>{
   if(file.mimetype === 'image/jpeg' ||
       file.mimetype === 'image/png' ||
       file.mimetype === 'image/gif' ){
@@ -16,8 +15,7 @@ const fileFilter = (req,file, cb)=>{
     cb(null, false);
   }
 }
-const testFile = (req, res, next) => {
-  if (req.file) {
+const testFile = (req, res, next) => {  if (req.file) {
     next();
   }else {
   res.status(400).json({errors: 'file is not img'})
@@ -34,7 +32,6 @@ router.post('/',
     body('age').isLength({min: 1}).isNumeric(),
     body('weight').isLength({min: 1}).isNumeric(),
     body('owner').isLength({min: 1}).isNumeric(),
-
     catController.cat_create);
 
 router.get('/:id', catController.cat_get_by_id);

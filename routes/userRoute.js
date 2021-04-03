@@ -9,7 +9,7 @@ router.get('/', userController.user_list_get);
 router.post('/',
     body('name').isLength({min: 3}).escape().blacklist(';'),
     body('email').isEmail(),
-    body('passwd').isStrongPassword(),
+    body('passwd').matches('(?=.*[A-Z]).{8,}'),
     // '(?=.*[A-Z]).{8,}'
     userController.user_create);
 

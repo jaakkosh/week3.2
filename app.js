@@ -11,6 +11,8 @@ const port = 3000;
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static('week2_public_html'));
 app.use(express.static('uploads'))
 // routes
 app.use('/', rootRoute);

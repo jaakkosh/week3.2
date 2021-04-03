@@ -1,0 +1,98 @@
+30.03.2021
+
+Työskentely Company-tietokannan kanssa. Jos olet tehnyt tämän jo tunnilla, niin voit siirtyä suoraan tekemään tehtäviä.
+
+1. Avaa Omasta tiedosto "Company DB and Data MariaDB.txt"
+2. Avaa selaimesta linkki: users.metropolia.fi/phpMyAdmin
+3. Valitse kaikki avaamastasi tekstitiedostosta ja kopioi se leikepöydälle
+4. Sijoita tekstisi tietokantaan (SQL-lomake + Sijoita + Suorita)
+
+===
+
+Esimerkit:
+1. Valitse kaikki esimiehet (supervisors)
+
+SELECT
+ s.lname Supervisor
+FROM
+ employee e,
+ employee s
+WHERE
+ e.supervisor = s.ssn;
+
+Esittääksesi esimiehet vain kerran, käytä määritettä DISTINCT:
+
+SELECT DISTINCT
+ s.lname Supervisor
+FROM
+ employee e,
+ employee s
+WHERE
+ e.supervisor = s.ssn;
+
+======
+
+Tehtävät:
+
+===
+
+1. Valitse kaikki osastot
+
+===
+SELECT * FROM `department`
+
+2. Valitse työntekijät ja esitä niistä etunimi ja sukunimi
+
+===
+SELECT FName, LName FROM `employee`
+
+
+3. Valitse kaikkien työntekijöiden nimet ja osastot, joilla he työskentelevät
+
+===
+SELECT FName, LName, DName FROM employee inner join department on employee.DeptNo = department.DNo
+
+
+4. Valitse kaikkien päälliköiden (manager) nimet ja osastot, joilla he työskentelevät
+
+===
+
+5. Laske kunkin osaston työntekijöiden lukumäärä
+
+===
+
+6. Valitse kaikki projektit, jotka ohjataan Hankinta (Purchase)-osastolla
+
+===
+
+7. Valitse kaikki esimiehet (supervisor) osastoittain
+
+===
+
+8. Valitse kaikki Tampereella olevat projektit ja lajittele ne ohjaavan osaston mukaan
+
+===
+
+9. Laske yhteenlasketut tunnit projekteittain
+
+===SELECT PName, SUM(Hours) FROM works_on INNER JOIN project on works_on.ProjNo = project.PNo GROUP BY ProjNo
+
+10. Laske yksikköhinta: työtunnit / projekti osastoittain
+    
+===
+
+11. Valitse työntekijät osastoittain ja esitä ne  ikäjärjestyksessä
+
+===
+
+12. Laske kaksosten tekemät työtunnit projekteittain
+
+===
+
+13. Valitse vanhin esimies
+
+===
+
+14. Valitse kaikki riippuvuussuhteessa olevat (dependents) ja ne, joilla on sisar (Vinkki: käytä OUTER JOIN:ia)
+
+===

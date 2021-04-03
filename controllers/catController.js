@@ -1,6 +1,7 @@
 'use strict';
 // catController
 const catModel = require('../models/catModel');
+const {validationResult} = require('express-validator');
 
 const cats = catModel.cats;
 
@@ -16,6 +17,10 @@ const cat_get_by_id = async (req, res) => {
 }
 
 const cat_create = async (req, res) => {
+  const errors = validationResult(req);
+  if(!errors.isEmpty()){
+    return res.status(400).json({errors: errors.array()});
+  }
   //here we will create a cat with data comming from req...
   console.log('catController cat_create', req.body, req.file);
   const id = await catModel.insertCat(req);
@@ -24,6 +29,11 @@ const cat_create = async (req, res) => {
 }
 
 const cat_update = async (req, res) => {
+  const errors = validationResult(req);
+  if(!errors.isEmpty()){
+    return res.status(400).json({errors: errors.array()});
+  }
+
   const updateOk = await catModel.updateCat(req.params.id, req);
   res.send(`updated... ${updateOk}`);
 };
